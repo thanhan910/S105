@@ -1,6 +1,7 @@
 {
   "name": "s105",
   "version": "1.0.0",
+  "private": true,
   "description": "Side Project 105. A WebSocket server-client.",
   "main": "index.js",
   "scripts": {
