@@ -7,7 +7,7 @@ const btnSend: HTMLButtonElement = document.querySelector("#btnSend");
 const username = new Date().getTime();
 
 const connection = new signalR.HubConnectionBuilder()
-  .withUrl("/hub")
+  .withUrl("/chatHub")
   .build();
 
 connection.on("messageReceived", (username: string, message: string) => {
