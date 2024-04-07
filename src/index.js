@@ -15,6 +15,9 @@ connection.on("messageReceived", function (username, message) {
     divMessages.appendChild(m);
     divMessages.scrollTop = divMessages.scrollHeight;
 });
+connection.on("dataReceived", function (data) {
+    console.log(data);
+});
 connection.start().catch(function (err) { return document.write(err); });
 tbMessage.addEventListener("keyup", function (e) {
     if (e.key === "Enter") {
@@ -25,4 +28,5 @@ btnSend.addEventListener("click", send);
 function send() {
     connection.send("newMessage", username, tbMessage.value)
         .then(function () { return (tbMessage.value = ""); });
+    connection.send("newData", "data");
 }
