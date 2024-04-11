@@ -449,3 +449,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
+# Ignore local/ and local-
+local/
+local-/
+local-*
