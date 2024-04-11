@@ -1,10 +1,10 @@
 namespace S105.Hubs;
 
-class PTVAPI3(string apiKey, int developerId)
+class PTVAPI3(string apiKey, int developerId, HttpClient client)
 {
     private readonly string _apiKey = apiKey;
     private readonly int _developerId = developerId;
-    private readonly HttpClient _client = new();
+    private readonly HttpClient _client = client;
 
     public string GetURL(string endpoint)
     {
@@ -33,11 +33,24 @@ class PTVAPI3(string apiKey, int developerId)
     public string GetData(string endpoint)
     {
         // get url from endpoint, api key and developer id
-        string url = GetURL(endpoint);
+        var url = GetURL(endpoint);
         // get data
         HttpResponseMessage response = _client.GetAsync(url).Result;
         response.EnsureSuccessStatusCode();
         string data = response.Content.ReadAsStringAsync().Result;
+        return data;
+    }
+
+    public async Task<string> GetDataAsync(string endpoint)
+    {
+        // get url from endpoint, api key and developer id
+        var url = GetURL(endpoint);
+
+        // get data asynchronously
+        HttpResponseMessage response = await _client.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        string data = await response.Content.ReadAsStringAsync();
+
         return data;
     }
 }
